@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>BINI - Cherry on Top</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  
+  <!-- Custom CSS -->
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <!-- Hero Section -->
+  <header class="hero-section text-center text-light">
+    <div class="container">
+      <h1 class="display-3 mb-4">Cherry On Top</h1>
+      <p class="lead">
+        BINI’s latest single "Cherry on Top" is a bubblegum pop song that was released on July 11, 2024.
+      </p>
+      <div class="mt-4">
+        <a class="btn btn-home btn-lg me-2" href="pages/counter.html" role="button">Live Counter</a>
+        <a class="btn btn-home btn-lg" href="pages/stream.html" role="button">Stream</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features-section text-center mt-5">
+    <div class="container">
+      <h2 class="mb-4">This is BINI</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-item">
+            <h3>Popularity</h3>
+            <p>Dominating social platforms such as Tiktok and Twitter.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <h3>Colorful Music Videos</h3>
+            <p>Accompanied by a vibrant and visually stunning music video that complements the upbeat vibe.</p>
+          </div>
+         </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <h3>Global Scene</h3>
+            <p>Already making waves around the world and climbing the charts with impressive speed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="news-container">
+          <div class="news-item">
+            <h2>Global Scene</h2>
+            <p>BINI's latest single "Cherry on Top" has been gathering attention lately worldwide.</p>
+          </div>
+          <div class="news-item">
+            <h2>Music Video Release</h2>
+            <p>A few hours after the release, the MV had gained 1M views in 3.5 hours.</p>
+          </div>
+          <div class="news-item">
+            <h2>Global Attention</h2>
+            <p>BINI’s Cherry on Top was featured in many different international names.</p>
+          </div>
+          <div class="news-item">
+            <h2>Dominating the Charts</h2>
+            <p>After almost an hour, BINI’s Cherry on Top debuted at the top 10 of iTunes PH.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+<footer class="text-center py-3 bg-dark text-light">
+  <p class="mb-0 copyright-text">© 2024 ABS-CBN. All rights reserved. This website is for non-commercial use only. The content displayed is for informational purposes only.</p>
+</footer>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Hide loading screen after content is loaded
+    window.addEventListener('load', () => {
+      document.querySelector('.loading-screen').style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>

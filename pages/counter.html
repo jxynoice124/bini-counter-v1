@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>BINI - Cherry on Top</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- Odometer CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/odometer@0.4.8/themes/odometer-theme-default.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style4.css">
+</head>
+
+<body>
+  <div class="loading-screen">
+    <div class="spinner-border text-danger" role="status">
+      <span class="visually-hidden">Loading..</span>
+    </div>
+  </div>
+  <!-- Counter Section -->
+  <section id="cotview" class="text-center text-light py-5">
+    <div class="container">
+      <h1 class="page-title">BINI Live Counters</h1>
+      <div class="counter-container" id="view-container">
+        <h2 class="counter-label">Pantropiko PV Views</h2>
+        <div class="thumbnail-container">
+          <img class="thumbnail" src="/img/pantropiko.jpg" alt="Thumbnail">
+        </div>
+        <div class="live_view_count odometer">Loading...</div>
+        <span class="view-text">views</span>
+        <div class="button-group">
+          <button class="screenshot-button" onclick="captureCounter(this)">Screenshot</button>
+          <button class="share-button" data-share-url="https://github.com/jxynoice124/binicounter.github.io">Share</button>
+        </div>
+      </div>
+      <div class="counter-container" id="sub-container">
+        <h2 class="counter-label">Cherry on Top Views</h2>
+        <div class="thumbnail-container">
+          <img class="thumbnail" src="/img/cherry_on_top.jpg" alt="Thumbnail">
+        </div>
+        <div class="live_sub_count odometer">Loading...</div>
+        <span class="view-text">views</span>
+        <div class="button-group">
+          <button class="screenshot-button" onclick="captureCounter(this)">Screenshot</button>
+          <button class="share-button" data-share-url="https://github.com/jxynoice124/binicounter.github.io">Share</button>
+        </div>
+      </div>
+      <div class="counter-container" id="third-container">
+        <h2 class="counter-label">Salamin Views</h2>
+        <div class="thumbnail-container">
+          <img class="thumbnail" src="/img/salamin.jpg" alt="Thumbnail">
+        </div>
+        <div class="live_third_count odometer">Loading...</div>
+        <span class="view-text">views</span>
+        <div class="button-group">
+          <button class="screenshot-button" onclick="captureCounter(this)">Screenshot</button>
+          <button class="share-button" data-share-url="https://github.com/jxynoice124/binicounter.github.io">Share</button>
+        </div>
+      </div>
+      <div class="counter-container" id="fourth-container">
+        <h2 class="counter-label">Karera Views</h2>
+        <div class="thumbnail-container">
+          <img class="thumbnail" src="/img/karera.jpg" alt="Thumbnail">
+        </div>
+        <div class="live_karera_count odometer">Loading...</div>
+        <span class="view-text">views</span>
+        <div class="button-group">
+          <button class="screenshot-button" onclick="captureCounter(this)">Screenshot</button>
+          <button class="share-button" data-share-url="https://github.com/jxynoice124/binicounter.github.io">Share</button>
+        </div>
+      </div>
+      <div class="counter-container" id="fifth-container">
+        <h2 class="counter-label">Nanana Views</h2>
+        <div class="thumbnail-container">
+          <img class="thumbnail" src="/img/nanana.jpg" alt="Thumbnail">
+        </div>
+        <div class="live_nanana_count odometer">Loading...</div>
+        <span class="view-text">views</span>
+        <div class="button-group">
+          <button class="screenshot-button" onclick="captureCounter(this)">Screenshot</button>
+          <button class="share-button" data-share-url="https://github.com/jxynoice124/binicounter.github.io">Share</button>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a class="btn btn-home btn-lg" href="/" role="button">Go Back</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3 bg-dark text-light">
+    <p class="mb-0 copyright-text">© 2024 ABS-CBN. All rights reserved. This website is for non-commercial use only. The content displayed is for informational purposes only.</p>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Odometer JS -->
+  <script src="https://cdn.jsdelivr.net/npm/odometer@0.4.8/odometer.min.js"></script>
+
+  <!-- HTML2Canvas JS -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+
+  <!-- Share.js -->
+  <script src="https://cdn.jsdelivr.net/npm/share.js@2.0.1/dist/share.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+
+  <script>
+    // Hide loading screen after content is loaded
+    window.addEventListener('load', () => {
+      document.querySelector('.loading-screen').style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>

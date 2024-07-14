@@ -1,0 +1,154 @@
+/* General Styles */
+.btn-home {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(145deg, #ff6f61, #ff0000); /* Cherry gradient */
+    border: 2px solid #c62828; /* Darker cherry color */
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif; /* More formal font */
+}
+
+.btn-home::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 20%, transparent 80%);
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.btn-home:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6);
+}
+
+.btn-home:hover {
+    background: linear-gradient(145deg, #d84315, #ff6f61); /* Reversed gradient on hover */
+    border-color: #ff6f61; /* Lighter cherry color on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05) translateY(-2px);
+}
+
+.btn-home:active {
+    background: #c62828; /* Deep cherry color when pressed */
+    border-color: #d84315;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98) translateY(1px);
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+body {
+  background-image: url("cot3.jpg"); /* Background image for the entire page */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+}
+
+/* Loading Screen Styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Card Styles */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.3));
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Gradient Backgrounds */
+.card.bg-youtube {
+  background: linear-gradient(145deg, #ff0000, #e60000); /* YouTube red gradient */
+}
+
+.card.bg-spotify {
+  background: linear-gradient(145deg, #1db954, #1ed760); /* Spotify green gradient */
+}
+
+.card.bg-deezer {
+  background: linear-gradient(145deg, #f63f8c, #d62839); /* Deezer magenta gradient */
+}
+
+.card.bg-itunes {
+  background: linear-gradient(145deg, #000000, #434343); /* iTunes dark gradient */
+}
+
+/* Card Text and Buttons */
+.card-title {
+  color: #ffffff;
+}
+
+.card-text {
+  color: #ffffff;
+}
+
+.btn {
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.btn-magenta {
+  background-color: #d63384; /* Deezer magenta */
+  color: #ffffff;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #212529;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}

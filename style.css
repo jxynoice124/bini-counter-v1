@@ -1,0 +1,218 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-image: url("img/cot.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  font-family: Arial, sans-serif; /* Base font for better consistency */
+}
+
+.image-background {
+  background-image: url("img/cot.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+h1 {
+  font-family: Courier New, monospace; 
+  color: red; 
+  text-shadow: 1px 1px 1px #750000;
+}
+
+/* Footer */
+.copyrightlods {
+  color: grey;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+/* Button Styles */
+.btn-home {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(145deg, #ff6f61, #ff0000); /* Cherry gradient */
+    border: 2px solid #c62828; /* Darker cherry color */
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif; /* More formal font */
+}
+
+.btn-home::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 20%, transparent 80%);
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.btn-home:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6);
+}
+
+.btn-home:hover {
+    background: linear-gradient(145deg, #d84315, #ff6f61); /* Reversed gradient on hover */
+    border-color: #ff6f61; /* Lighter cherry color on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05) translateY(-2px);
+}
+
+.btn-home:active {
+    background: #c62828; /* Deep cherry color when pressed */
+    border-color: #d84315;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98) translateY(1px);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to right, #ff9a9e, #fad0c4); /* Gradient background */
+    padding: 80px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Features Section */
+.features-section {
+    background-color: #fff; /* White background for contrast */
+    padding: 60px 0;
+}
+
+.feature-item {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: scale(1.05); /* Slightly enlarge the feature item on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* News Section Styles */
+.news-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px 0;
+    gap: 20px;
+    scroll-behavior: smooth; /* Smooth scroll */
+    border: 2px solid #ff4081; /* Cherry border around the news section */
+    border-radius: 8px;
+    background-color: rgba(255, 235, 238, 0.8); /* Semi-transparent light pink background */
+}
+
+.news-item {
+    flex: 0 0 auto;
+    width: 300px;
+    padding: 15px;
+    background: rgba(255, 235, 238, 0.9); /* Semi-transparent light cherry color */
+    border: 1px solid #ff4081; /* Cherry border color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.news-item h2 {
+    font-family: 'Arial', sans-serif;
+    color: #ff4081; /* Cherry color */
+    margin-bottom: 10px;
+}
+
+.news-item p {
+    font-family: 'Arial', sans-serif;
+    color: #333; /* Darker text for readability */
+    line-height: 1.6;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.social-media .btn {
+    background-color: #ffffff;
+    color: #343a40;
+    border: 1px solid #343a40;
+}
+
+.social-media .btn:hover {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Make sure it's on top of everything */
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.4em;
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 50px;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #333333;
+  border-top: 2px solid #ff4081; /* Cherry border for emphasis */
+}
+
+.copyright-text {
+  margin: 0;
+  padding: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
