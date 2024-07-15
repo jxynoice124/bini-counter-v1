@@ -1,18 +1,19 @@
 $(document).ready(function() {
   const key = 'AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA';
   const videoIDs = [
-    'Zx31bB2vMns',
-    'wufUX5P2Ds8',
-    'J1Ip2sC_lss',
-    'QNV2DmBxChQ',
-    'wJ6GCeSR4ss'
+    'Zx31bB2vMns', // Cherry On Top
+    'wufUX5P2Ds8', // Salamin
+    'J1Ip2sC_lss', // Pantropiko
+    'QNV2DmBxChQ', // Karera
+    'wJ6GCeSR4ss'  // Nanana
   ];
 
-  var viewCountEl = document.querySelector('.live_view_count');
-  var subCountEl = document.querySelector('.live_sub_count');
-  var thirdCountEl = document.querySelector('.live_third_count');
-  var kareraCountEl = document.querySelector('.live_karera_count');
-  var nananaCountEl = document.querySelector('.live_nanana_count');
+  // Elements
+  var viewCountEl = document.querySelector('.live_view_count'); // Cherry On Top
+  var subCountEl = document.querySelector('.live_sub_count'); // Salamin
+  var thirdCountEl = document.querySelector('.live_third_count'); // Pantropiko
+  var kareraCountEl = document.querySelector('.live_karera_count'); // Karera
+  var nananaCountEl = document.querySelector('.live_nanana_count'); // Nanana
 
   if (!viewCountEl || !subCountEl || !thirdCountEl || !kareraCountEl || !nananaCountEl) {
     console.error('Some elements not found');
@@ -25,29 +26,28 @@ $(document).ready(function() {
   var kareraCount = new Odometer({ el: kareraCountEl, format: ',ddd', theme: 'default' });
   var nananaCount = new Odometer({ el: nananaCountEl, format: ',ddd', theme: 'default' });
 
+  // Fetch video data for each video ID
   videoIDs.forEach((videoID, index) => {
     const odometer = [viewCount, subCount, thirdCount, kareraCount, nananaCount][index];
-    getYoutubeVideoData(videoID, odometer);
     setInterval(function () {
       getYoutubeVideoData(videoID, odometer);
     }, 4000);    
   });
 
   function getYoutubeVideoData(videoID, odometer) {
-    const apiUrl = `/api/youtube?videoID=${videoID}`;
+    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoID}&key=${key}`;
 
     $.getJSON(apiUrl)
       .done(function(result) {
+        console.log('Video API Response:', result);
+
         if (result && result.items && result.items.length > 0) {
           const videoData = result.items[0];
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          if (!isNaN(viewCount)) {
-            odometer.update(Number(viewCount));
-          } else {
-            odometer.update('Error');
-          }
+          // Update the odometer and title
+          odometer.update(viewCount);
 
           let containerId;
           if (odometer.el === viewCountEl) {
@@ -68,10 +68,12 @@ $(document).ready(function() {
             console.error('Container ID mapping not found for odometer:', odometer.el.className);
           }
         } else {
+          console.error('No data found or unexpected response structure.');
           odometer.update('Error');
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Error fetching video data:', textStatus, errorThrown);
         odometer.update('Error');
       });
   }
