@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const key = 'process.env.youtubeAPIKey';
+  const key = process.env.youtubeAPIKey;
   const videoIDs = [
     'Zx31bB2vMns', // Cherry On Top
     'wufUX5P2Ds8', // Salamin
