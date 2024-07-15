@@ -91,7 +91,7 @@ $(document).ready(function() {
     watermarkText.style.left = '50%';
     watermarkText.style.transform = 'translateX(-50%)';
     watermarkText.style.fontSize = '9px';
-    watermarkText.style.color = 'rgba(0, 0, 0, 0.5)';
+    watermarkText.style.color = 'rgba(255, 255, 255, 0.5)';
     watermarkText.classList.add('watermark');
 
     const copyrightText = document.createElement('div');
@@ -101,7 +101,7 @@ $(document).ready(function() {
     copyrightText.style.left = '50%';
     copyrightText.style.transform = 'translateX(-50%)';
     copyrightText.style.fontSize = '9px';
-    copyrightText.style.color = 'rgba(0, 0, 0, 0.5)';
+    copyrightText.style.color = 'rgba(255, 255, 255, 0.5)';
     copyrightText.classList.add('copyright');
 
     container.appendChild(watermarkText);
