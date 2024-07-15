@@ -29,9 +29,9 @@ $(document).ready(function() {
   // Fetch video data for each video ID
   videoIDs.forEach((videoID, index) => {
     const odometer = [viewCount, subCount, thirdCount, kareraCount, nananaCount][index];
-  setInterval(function () {
-    getYoutubeVideoData(videoID, odometer);
-  }, 4000);    
+    setInterval(function () {
+      getYoutubeVideoData(videoID, odometer);
+    }, 4000);    
   });
 
   function getYoutubeVideoData(videoID, odometer) {
@@ -46,8 +46,13 @@ $(document).ready(function() {
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          // Update the odometer and title
-          odometer.update(viewCount);
+          // Ensure viewCount is a valid number before updating odometer
+          if (!isNaN(viewCount)) {
+            odometer.update(Number(viewCount));
+          } else {
+            console.error('Invalid viewCount:', viewCount);
+            odometer.update('Error');
+          }
 
           let containerId;
           if (odometer.el === viewCountEl) {
@@ -126,6 +131,7 @@ $(document).ready(function() {
       console.error('Error capturing screenshot:', error);
     });
   };
+
   document.querySelectorAll('.share-button').forEach(button => {
     button.addEventListener('click', function() {
       const shareUrl = button.getAttribute('data-share-url');
