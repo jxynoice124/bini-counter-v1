@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Inject API Key
+        run: |
+          echo "Injecting API key into JS file"
+          sed -i 's/const key = "YOUTUBE_API_KEY";/const key = "${{ secrets.YOUTUBE_API_KEY }}";/' pages/counter.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./pages
