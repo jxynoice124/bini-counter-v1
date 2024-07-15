@@ -1,11 +1,10 @@
 $(document).ready(function() {
-  const key = 'AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA';
   const videoIDs = [
     'Zx31bB2vMns', // Cherry On Top
     'wufUX5P2Ds8', // Salamin
     'J1Ip2sC_lss', // Pantropiko
     'QNV2DmBxChQ', // Karera
-    'wJ6GCeSR4ss' // Nanana
+    'wJ6GCeSR4ss'  // Nanana
   ];
 
   // Elements
@@ -29,26 +28,30 @@ $(document).ready(function() {
   // Fetch video data for each video ID
   videoIDs.forEach((videoID, index) => {
     const odometer = [viewCount, subCount, thirdCount, kareraCount, nananaCount][index];
-  setInterval(function () {
-    getYoutubeVideoData(videoID, odometer);
-  }, 4000);    
+    setInterval(function () {
+      getYoutubeVideoData(videoID, odometer);
+    }, 4000);    
   });
 
   function getYoutubeVideoData(videoID, odometer) {
-    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoID}&key=${key}`;
+    const apiUrl = `/api/youtube?videoID=${videoID}`;
 
     $.getJSON(apiUrl)
       .done(function(result) {
-        console.log('Video API Response:', result);
-
+        // Check the API response
         if (result && result.items && result.items.length > 0) {
           const videoData = result.items[0];
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          // Update the odometer and title
-          odometer.update(viewCount);
+          // Update the odometer
+          if (!isNaN(viewCount)) {
+            odometer.update(Number(viewCount));
+          } else {
+            odometer.update('Error');
+          }
 
+          // Update the label with video title
           let containerId;
           if (odometer.el === viewCountEl) {
             containerId = 'view-container';
@@ -68,12 +71,10 @@ $(document).ready(function() {
             console.error('Container ID mapping not found for odometer:', odometer.el.className);
           }
         } else {
-          console.error('No data found or unexpected response structure.');
           odometer.update('Error');
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error fetching video data:', textStatus, errorThrown);
         odometer.update('Error');
       });
   }
@@ -106,8 +107,29 @@ $(document).ready(function() {
       scrollY: -window.scrollY,
       logging: true
     }).then(canvas => {
-      console.log('Screenshot captured for container.');
+      // Add watermark and copyright text
+      const ctx = canvas.getContext('2d');
+      const watermarkText = 'https://binicounter.netlify.app'; // Customize this text
+      const copyrightText = '© 2024 ABS-CBN. All rights reserved.'; // Customize this text
 
+      ctx.font = '16px Arial';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'; // Semi-transparent black
+      ctx.textAlign = 'center';
+      
+      const watermarkX = canvas.width / 2;
+      const watermarkY = canvas.height - 40; // 40px from the bottom
+      
+      const copyrightX = canvas.width / 2;
+      const copyrightY = canvas.height - 20; // 20px from the bottom
+      
+      // Draw watermark
+      ctx.fillText(watermarkText, watermarkX, watermarkY);
+
+      // Draw copyright text
+      ctx.font = '10px Arial'; // Smaller font for copyright
+      ctx.fillText(copyrightText, copyrightX, copyrightY);
+
+      // Restore original styles
       container.style.borderRadius = '';
       container.style.overflow = '';
 
@@ -126,6 +148,7 @@ $(document).ready(function() {
       console.error('Error capturing screenshot:', error);
     });
   };
+
   document.querySelectorAll('.share-button').forEach(button => {
     button.addEventListener('click', function() {
       const shareUrl = button.getAttribute('data-share-url');
@@ -135,9 +158,9 @@ $(document).ready(function() {
           url: shareUrl
         }).catch(console.error);
       } else {
-        // Fallback for browsers that do not support the Web Share API
-        alert(`Please share this URL: ${shareUrl}`);
+        alert(`Share this URL: ${shareUrl}`);
       }
     });
   });
 });
+          
