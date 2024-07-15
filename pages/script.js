@@ -1,11 +1,10 @@
 $(document).ready(function() {
-  const key = 'process.env.YOUTUBE_API_KEY';
   const videoIDs = [
     'Zx31bB2vMns', // Cherry On Top
     'wufUX5P2Ds8', // Salamin
     'J1Ip2sC_lss', // Pantropiko
     'QNV2DmBxChQ', // Karera
-    'wJ6GCeSR4ss' // Nanana
+    'wJ6GCeSR4ss'  // Nanana
   ];
 
   // Elements
@@ -29,25 +28,26 @@ $(document).ready(function() {
   // Fetch video data for each video ID
   videoIDs.forEach((videoID, index) => {
     const odometer = [viewCount, subCount, thirdCount, kareraCount, nananaCount][index];
-  setInterval(function () {
-    getYoutubeVideoData(videoID, odometer);
-  }, 4000);    
+    setInterval(function () {
+      getYoutubeVideoData(videoID, odometer);
+    }, 4000);    
   });
 
   function getYoutubeVideoData(videoID, odometer) {
-    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoID}&key=${key}`;
+    const apiUrl = `/api/youtube?videoID=${videoID}`;
 
     $.getJSON(apiUrl)
       .done(function(result) {
-        console.log('Video API Response:', result);
-
         if (result && result.items && result.items.length > 0) {
           const videoData = result.items[0];
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          // Update the odometer and title
-          odometer.update(viewCount);
+          if (!isNaN(viewCount)) {
+            odometer.update(Number(viewCount));
+          } else {
+            odometer.update('Error');
+          }
 
           let containerId;
           if (odometer.el === viewCountEl) {
@@ -68,12 +68,10 @@ $(document).ready(function() {
             console.error('Container ID mapping not found for odometer:', odometer.el.className);
           }
         } else {
-          console.error('No data found or unexpected response structure.');
           odometer.update('Error');
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error fetching video data:', textStatus, errorThrown);
         odometer.update('Error');
       });
   }
@@ -106,8 +104,6 @@ $(document).ready(function() {
       scrollY: -window.scrollY,
       logging: true
     }).then(canvas => {
-      console.log('Screenshot captured for container.');
-
       container.style.borderRadius = '';
       container.style.overflow = '';
 
@@ -126,6 +122,7 @@ $(document).ready(function() {
       console.error('Error capturing screenshot:', error);
     });
   };
+
   document.querySelectorAll('.share-button').forEach(button => {
     button.addEventListener('click', function() {
       const shareUrl = button.getAttribute('data-share-url');
@@ -135,10 +132,8 @@ $(document).ready(function() {
           url: shareUrl
         }).catch(console.error);
       } else {
-        // Fallback for browsers that do not support the Web Share API
         alert(`Please share this URL: ${shareUrl}`);
       }
     });
   });
 });
-        
