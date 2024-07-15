@@ -1,19 +1,18 @@
 $(document).ready(function() {
   const key = 'AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA';
   const videoIDs = [
-    'Zx31bB2vMns', // Cherry On Top
-    'wufUX5P2Ds8', // Salamin
-    'J1Ip2sC_lss', // Pantropiko
-    'QNV2DmBxChQ', // Karera
-    'wJ6GCeSR4ss'  // Nanana
+    'Zx31bB2vMns',
+    'wufUX5P2Ds8',
+    'J1Ip2sC_lss',
+    'QNV2DmBxChQ',
+    'wJ6GCeSR4ss'
   ];
 
-  // Elements
-  var viewCountEl = document.querySelector('.live_view_count'); // Cherry On Top
-  var subCountEl = document.querySelector('.live_sub_count'); // Salamin
-  var thirdCountEl = document.querySelector('.live_third_count'); // Pantropiko
-  var kareraCountEl = document.querySelector('.live_karera_count'); // Karera
-  var nananaCountEl = document.querySelector('.live_nanana_count'); // Nanana
+  var viewCountEl = document.querySelector('.live_view_count');
+  var subCountEl = document.querySelector('.live_sub_count');
+  var thirdCountEl = document.querySelector('.live_third_count');
+  var kareraCountEl = document.querySelector('.live_karera_count');
+  var nananaCountEl = document.querySelector('.live_nanana_count');
 
   if (!viewCountEl || !subCountEl || !thirdCountEl || !kareraCountEl || !nananaCountEl) {
     console.error('Some elements not found');
@@ -26,28 +25,29 @@ $(document).ready(function() {
   var kareraCount = new Odometer({ el: kareraCountEl, format: ',ddd', theme: 'default' });
   var nananaCount = new Odometer({ el: nananaCountEl, format: ',ddd', theme: 'default' });
 
-  // Fetch video data for each video ID
   videoIDs.forEach((videoID, index) => {
     const odometer = [viewCount, subCount, thirdCount, kareraCount, nananaCount][index];
+    getYoutubeVideoData(videoID, odometer);
     setInterval(function () {
       getYoutubeVideoData(videoID, odometer);
     }, 4000);    
   });
 
   function getYoutubeVideoData(videoID, odometer) {
-    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoID}&key=${key}`;
+    const apiUrl = `/api/youtube?videoID=${videoID}`;
 
     $.getJSON(apiUrl)
       .done(function(result) {
-        console.log('Video API Response:', result);
-
         if (result && result.items && result.items.length > 0) {
           const videoData = result.items[0];
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          // Update the odometer and title
-          odometer.update(viewCount);
+          if (!isNaN(viewCount)) {
+            odometer.update(Number(viewCount));
+          } else {
+            odometer.update('Error');
+          }
 
           let containerId;
           if (odometer.el === viewCountEl) {
@@ -68,12 +68,10 @@ $(document).ready(function() {
             console.error('Container ID mapping not found for odometer:', odometer.el.className);
           }
         } else {
-          console.error('No data found or unexpected response structure.');
           odometer.update('Error');
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error fetching video data:', textStatus, errorThrown);
         odometer.update('Error');
       });
   }
@@ -85,6 +83,29 @@ $(document).ready(function() {
       console.error('Container not found');
       return;
     }
+
+    const watermarkText = document.createElement('div');
+    watermarkText.textContent = 'https://binicounter.netlify.app';
+    watermarkText.style.position = 'absolute';
+    watermarkText.style.bottom = '40px';
+    watermarkText.style.left = '50%';
+    watermarkText.style.transform = 'translateX(-50%)';
+    watermarkText.style.fontSize = '9px';
+    watermarkText.style.color = 'rgba(0, 0, 0, 0.5)';
+    watermarkText.classList.add('watermark');
+
+    const copyrightText = document.createElement('div');
+    copyrightText.textContent = '© 2024 ABS-CBN. All rights reserved.';
+    copyrightText.style.position = 'absolute';
+    copyrightText.style.bottom = '20px';
+    copyrightText.style.left = '50%';
+    copyrightText.style.transform = 'translateX(-50%)';
+    copyrightText.style.fontSize = '9px';
+    copyrightText.style.color = 'rgba(0, 0, 0, 0.5)';
+    copyrightText.classList.add('copyright');
+
+    container.appendChild(watermarkText);
+    container.appendChild(copyrightText);
 
     const screenshotButton = container.querySelector('.screenshot-button');
     const shareButton = container.querySelector('.share-button');
@@ -106,29 +127,6 @@ $(document).ready(function() {
       scrollY: -window.scrollY,
       logging: true
     }).then(canvas => {
-      console.log('Screenshot captured for container.');
-
-      // Add watermark and copyright text
-      const ctx = canvas.getContext('2d');
-      const watermarkText = 'https://binicounter.netlify.app';
-      const copyrightText = '© 2024 ABS-CBN. All rights reserved.';
-      ctx.font = '9px Arial';
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'; // Semi-transparent black
-      ctx.textAlign = 'center';
-      
-      const watermarkX = canvas.width / 2;
-      const watermarkY = canvas.height - 40; // 40px from the bottom
-      
-      const copyrightX = canvas.width / 2;
-      const copyrightY = canvas.height - 20; // 20px from the bottom
-      
-      // Draw watermark
-      ctx.fillText(watermarkText, watermarkX, watermarkY);
-
-      // Draw copyright text
-      ctx.font = '9px Arial'; // Smaller font for copyright
-      ctx.fillText(copyrightText, copyrightX, copyrightY);
-
       container.style.borderRadius = '';
       container.style.overflow = '';
 
@@ -138,6 +136,9 @@ $(document).ready(function() {
       if (shareButton) {
         shareButton.style.display = 'inline-block';
       }
+
+      container.removeChild(watermarkText);
+      container.removeChild(copyrightText);
 
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
@@ -157,10 +158,8 @@ $(document).ready(function() {
           url: shareUrl
         }).catch(console.error);
       } else {
-        // Fallback for browsers that do not support the Web Share API
         alert(`Please share this URL: ${shareUrl}`);
       }
     });
   });
 });
-            
