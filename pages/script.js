@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  const key = 'AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA';
   const videoIDs = [
     'Zx31bB2vMns', // Cherry On Top
     'wufUX5P2Ds8', // Salamin
@@ -34,24 +35,20 @@ $(document).ready(function() {
   });
 
   function getYoutubeVideoData(videoID, odometer) {
-    const apiUrl = `/api/youtube?videoID=${videoID}`;
+    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoID}&key=${key}`;
 
     $.getJSON(apiUrl)
       .done(function(result) {
-        // Check the API response
+        console.log('Video API Response:', result);
+
         if (result && result.items && result.items.length > 0) {
           const videoData = result.items[0];
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          // Update the odometer
-          if (!isNaN(viewCount)) {
-            odometer.update(Number(viewCount));
-          } else {
-            odometer.update('Error');
-          }
+          // Update the odometer and title
+          odometer.update(viewCount);
 
-          // Update the label with video title
           let containerId;
           if (odometer.el === viewCountEl) {
             containerId = 'view-container';
@@ -71,10 +68,12 @@ $(document).ready(function() {
             console.error('Container ID mapping not found for odometer:', odometer.el.className);
           }
         } else {
+          console.error('No data found or unexpected response structure.');
           odometer.update('Error');
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Error fetching video data:', textStatus, errorThrown);
         odometer.update('Error');
       });
   }
@@ -107,12 +106,13 @@ $(document).ready(function() {
       scrollY: -window.scrollY,
       logging: true
     }).then(canvas => {
+      console.log('Screenshot captured for container.');
+
       // Add watermark and copyright text
       const ctx = canvas.getContext('2d');
-      const watermarkText = 'https://binicounter.netlify.app'; // Customize this text
-      const copyrightText = '© 2024 ABS-CBN. All rights reserved.'; // Customize this text
-
-      ctx.font = '16px Arial';
+      const watermarkText = 'https://binicounter.netlify.app';
+      const copyrightText = '© 2024 ABS-CBN. All rights reserved.';
+      ctx.font = '9px Arial';
       ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'; // Semi-transparent black
       ctx.textAlign = 'center';
       
@@ -126,10 +126,9 @@ $(document).ready(function() {
       ctx.fillText(watermarkText, watermarkX, watermarkY);
 
       // Draw copyright text
-      ctx.font = '10px Arial'; // Smaller font for copyright
+      ctx.font = '9px Arial'; // Smaller font for copyright
       ctx.fillText(copyrightText, copyrightX, copyrightY);
 
-      // Restore original styles
       container.style.borderRadius = '';
       container.style.overflow = '';
 
@@ -158,9 +157,10 @@ $(document).ready(function() {
           url: shareUrl
         }).catch(console.error);
       } else {
-        alert(`Share this URL: ${shareUrl}`);
+        // Fallback for browsers that do not support the Web Share API
+        alert(`Please share this URL: ${shareUrl}`);
       }
     });
   });
 });
-          
+            
