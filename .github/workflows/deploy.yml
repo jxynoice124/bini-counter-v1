@@ -1,4 +1,4 @@
-name: Deploy
+name: bini-counter
 
 on:
   push:
@@ -8,18 +8,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Inject API Key
-        run: |
-          echo "Injecting API key into JS file"
-          sed -i 's/const key = "YOUTUBE_API_KEY";/const key = "${{ secrets.YOUTUBE_API_KEY }}";/' pages/counter.html
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./pages
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run script
+      env:
+        YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      run: |
+        node /pages/script.js
