@@ -38,17 +38,20 @@ $(document).ready(function() {
 
     $.getJSON(apiUrl)
       .done(function(result) {
+        // Check the API response
         if (result && result.items && result.items.length > 0) {
           const videoData = result.items[0];
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
+          // Update the odometer
           if (!isNaN(viewCount)) {
             odometer.update(Number(viewCount));
           } else {
             odometer.update('Error');
           }
 
+          // Update the label with video title
           let containerId;
           if (odometer.el === viewCountEl) {
             containerId = 'view-container';
