@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const key = 'AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA'; 
+  const key = 'YOUR_API_KEY'; 
   const videoIDs = [
     'Zx31bB2vMns', 
     'wufUX5P2Ds8', 
