@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const key = YOUTUBE_API_KEY;
+  const key = process.env.YOUTUBE_API_KEY;
   const videoIDs = [
     'Zx31bB2vMns', // Cherry On Top
     'wufUX5P2Ds8', // Salamin
