@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-  background-image: url("cot3.jpg");
+  background-image: url("https://jxynoice124.github.io/bini-counter-v1/pages/cot3.jpg"); /* Use an absolute path if needed */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -31,6 +31,7 @@ h1.page-title {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   position: relative;
   margin-bottom: 30px; /* Add margin for spacing */
+  padding-bottom: 60px; /* Ensure space for button group */
 }
 
 .video-thumbnail-link {
@@ -58,7 +59,6 @@ h1.page-title {
 }
 
 .view-text {
-  font-family: 'Arial', sans-serif; 
   font-size: 1rem;
   color: #fff;
 }
@@ -123,67 +123,60 @@ footer {
   max-width: 100%;
   height: auto;
   border: 2px solid #ff4081; /* Cherry border */
-  border-radius:8px;
-}
-
-.counter-container {
-  position: relative;
-  padding-bottom: 60px;
+  border-radius: 8px;
 }
 
 .odometer {
   font-size: 2rem; 
-  font-family: 'Arial', sans-serif; 
 }
 
 .btn-home {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(145deg, #ff6f61, #ff0000); /* Cherry gradient */
-    border: 2px solid #c62828; /* Darker cherry color */
-    border-radius: 8px;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: 'Arial', sans-serif; /* More formal font */
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(145deg, #ff6f61, #ff0000); /* Cherry gradient */
+  border: 2px solid #c62828; /* Darker cherry color */
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-home::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 20%, transparent 80%);
-    transition: all 0.4s ease;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    opacity: 0;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 20%, transparent 80%);
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0;
 }
 
 .btn-home:hover::before {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.6);
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(0.6);
 }
 
 .btn-home:hover {
-    background: linear-gradient(145deg, #d84315, #ff6f61); /* Reversed gradient on hover */
-    border-color: #ff6f61; /* Lighter cherry color on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05) translateY(-2px);
+  background: linear-gradient(145deg, #d84315, #ff6f61); /* Reversed gradient on hover */
+  border-color: #ff6f61; /* Lighter cherry color on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05) translateY(-2px);
 }
 
 .btn-home:active {
-    background: #c62828; /* Deep cherry color when pressed */
-    border-color: #d84315;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(0.98) translateY(1px);
+  background: #c62828; /* Deep cherry color when pressed */
+  border-color: #d84315;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98) translateY(1px);
 }
