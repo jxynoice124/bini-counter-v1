@@ -1,19 +1,18 @@
 $(document).ready(function() {
-  const key = AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA;
+  const key = 'AIzaSyC9X8DEYN_Csp8OU1aIzv_Kn3yYJBJGzkA'; 
   const videoIDs = [
-    'Zx31bB2vMns', // Cherry On Top
-    'wufUX5P2Ds8', // Salamin
-    'J1Ip2sC_lss', // Pantropiko
-    'QNV2DmBxChQ', // Karera
-    'wJ6GCeSR4ss' // Nanana
+    'Zx31bB2vMns', 
+    'wufUX5P2Ds8', 
+    'J1Ip2sC_lss', 
+    'QNV2DmBxChQ', 
+    'wJ6GCeSR4ss' 
   ];
 
-  // Elements
-  var viewCountEl = document.querySelector('.live_view_count'); // Cherry On Top
-  var subCountEl = document.querySelector('.live_sub_count'); // Salamin
-  var thirdCountEl = document.querySelector('.live_third_count'); // Pantropiko
-  var kareraCountEl = document.querySelector('.live_karera_count'); // Karera
-  var nananaCountEl = document.querySelector('.live_nanana_count'); // Nanana
+  var viewCountEl = document.querySelector('.live_view_count'); 
+  var subCountEl = document.querySelector('.live_sub_count'); 
+  var thirdCountEl = document.querySelector('.live_third_count'); 
+  var kareraCountEl = document.querySelector('.live_karera_count'); 
+  var nananaCountEl = document.querySelector('.live_nanana_count'); 
 
   if (!viewCountEl || !subCountEl || !thirdCountEl || !kareraCountEl || !nananaCountEl) {
     console.error('Some elements not found');
@@ -26,7 +25,6 @@ $(document).ready(function() {
   var kareraCount = new Odometer({ el: kareraCountEl, format: ',ddd', theme: 'default' });
   var nananaCount = new Odometer({ el: nananaCountEl, format: ',ddd', theme: 'default' });
 
-  // Fetch video data for each video ID
   videoIDs.forEach((videoID, index) => {
     const odometer = [viewCount, subCount, thirdCount, kareraCount, nananaCount][index];
     setInterval(function () {
@@ -46,9 +44,8 @@ $(document).ready(function() {
           const viewCount = videoData.statistics.viewCount;
           const title = videoData.snippet.title;
 
-          // Ensure viewCount is a valid number before updating odometer
-          if (!isNaN(viewCount)) {
-            odometer.update(Number(viewCount));
+          if (viewCount && !isNaN(parseInt(viewCount))) {
+            odometer.update(parseInt(viewCount));
           } else {
             console.error('Invalid viewCount:', viewCount);
             odometer.update('Error');
@@ -141,7 +138,6 @@ $(document).ready(function() {
           url: shareUrl
         }).catch(console.error);
       } else {
-        // Fallback for browsers that do not support the Web Share API
         alert(`Please share this URL: ${shareUrl}`);
       }
     });
